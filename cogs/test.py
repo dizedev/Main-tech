@@ -3,7 +3,8 @@ import asyncio
 import disnake
 from disnake.ext import commands
 
-class mute(commands.Cog):
+
+class Mute(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -11,21 +12,21 @@ class mute(commands.Cog):
     @commands.has_permissions(manage_roles=True)
     async def mute(self, ctx, member: disnake.Member, time: int, *, reason=None):
         guild = ctx.guild
-        mutedRole = disnake.utils.get(guild.roles, name="Muted")
+        muted_role = disnake.utils.get(guild.roles, name="Muted")
 
-        if not mutedRole:
-            mutedRole = await guild.create_role(name="Muted")
+        if not muted_role:
+            muted_role = await guild.create_role(name="Muted")
 
             # Проверка роли на каждый чат
             for channel in guild.channels:
-                await channel.set_permissions(mutedRole, speak=False, send_messages=False)
+                await channel.set_permissions(muted_role, speak=False, send_messages=False)
 
-        await member.add_roles(mutedRole, reason=reason)
+        await member.add_roles(muted_role, reason=reason)
         await ctx.send(f"{member.mention} был замучен на {time} секунд. Причина: {reason}.")
         await asyncio.sleep(time)
-        await member.remove_roles(mutedRole)
+        await member.remove_roles(muted_role)
         await ctx.send(f"{member.mention} больше не замучен.")
 
 
 def setup(bot):
-    bot.add_cog(mute(bot))
+    bot.add_cog(Mute(bot))

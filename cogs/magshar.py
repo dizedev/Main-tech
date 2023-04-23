@@ -2,13 +2,13 @@ import random
 
 from disnake.ext import commands
 
-class shar(commands.Cog):
+
+class MagicBall(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
     @commands.slash_command()
-    async def шар(self,ctx, *, question):
+    async def ask_a_ball(self, ctx, *, question):
         answers = [
             "Я не знаю.",
             "Да.",
@@ -18,5 +18,6 @@ class shar(commands.Cog):
         ]
         await ctx.send(f"Ваш вопрос: {question}\nМой ответ: {random.choice(answers)}")
 
+
 def setup(bot):
-    bot.add_cog(shar(bot))
+    bot.add_cog(MagicBall(bot))

@@ -1,10 +1,10 @@
 import disnake
 from disnake.ext import commands
 
-class help1(commands.Cog):
+
+class Help1(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
 
     @commands.slash_command()
     async def commands(self, ctx):
@@ -15,5 +15,6 @@ class help1(commands.Cog):
         embed.add_field(name="$mute", value="Выдает мут участнику на определенное время.")
         await ctx.send(embed=embed)
 
+
 def setup(bot):
-    bot.add_cog(help1(bot))
+    bot.add_cog(Help1(bot))
