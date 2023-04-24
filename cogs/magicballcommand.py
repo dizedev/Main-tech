@@ -1,14 +1,14 @@
 import random
-
+import disnake
 from disnake.ext import commands
 
 
-class MagicBall(commands.Cog):
+class MagicBallCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command()
-    async def ask_a_ball(self, ctx, *, question):
+    @commands.slash_command(description="Даёт верные ответы на все ваши вопросы.")
+    async def ball(self, ctx: disnake.AppCommandInteraction, *, question):
         answers = [
             "Я не знаю.",
             "Да.",
@@ -20,4 +20,4 @@ class MagicBall(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(MagicBall(bot))
+    bot.add_cog(MagicBallCommand(bot))
