@@ -6,7 +6,7 @@ class HelpCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command()
+    @commands.slash_command(name="commands")
     async def commands(self, ctx: disnake.AppCommandInteraction):
         embed = disnake.Embed(title="Помощь по командам", description="Вот список всех моих команд и их описания:")
         embed.add_field(name="/help", value="Показывает список всех доступных команд.")

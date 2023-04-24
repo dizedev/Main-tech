@@ -6,7 +6,7 @@ class MathCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command()
+    @commands.slash_command(name="math")
     async def math(self, ctx: disnake.AppCommandInteraction, *, equation):
         try:
             result = eval(equation)

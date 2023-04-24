@@ -7,7 +7,7 @@ class DogCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command()
+    @commands.slash_command(name="dog")
     async def dog(self, ctx: disnake.AppCommandInteraction):
         response = requests.get('https://dog.ceo/api/breeds/image/random')
         img_url = response.json()['message']

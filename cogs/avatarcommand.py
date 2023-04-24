@@ -6,7 +6,7 @@ class AvatarCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command()
+    @commands.slash_command(name="avatar")
     async def avatar(self, ctx: disnake.AppCommandInteraction, member: disnake.Member = None):
         if not member:
             member = ctx.author

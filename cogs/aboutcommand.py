@@ -6,7 +6,7 @@ class AboutCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command()
+    @commands.slash_command(name="about")
     async def about(self, ctx: disnake.AppCommandInteraction):
         embed = disnake.Embed(title='О боте', description='Многофункциональный бот.', color=0x00ff00)
         embed.set_author(name='Hyper Tech')

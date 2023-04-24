@@ -8,18 +8,33 @@ intents = disnake.Intents.all()
 bot = commands.Bot(command_prefix="$", intents=intents)
 
 
+# Функция сохранения данных пользователя в JSON
+def save_data(user, data):
+    with open(f'./users/{user.id}.json', 'w') as file:
+        json.dump(data, file)
+
+
+# Функция загрузки данных пользователя из файла JSON
+def load_data(user):
+    try:
+        with open(f'./users/{user.id}.json', 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return None
+
+
 @bot.event
 async def on_ready():
     print("Bot is ready")
 
 
-@bot.command()
+@bot.command(name="super_secret_command")
 async def secret(ctx):
     await ctx.message.delete()
     await ctx.send(f'Привет, {ctx.author.mention}. Это тайное сообщение!')
 
 
-@bot.command()
+@bot.command(name="news")
 async def news(ctx):
     # Ваш код для получения новостей
     page_news = [
@@ -43,42 +58,30 @@ async def news(ctx):
     await ctx.send(embed=embed)
 
 
-@bot.command()
+@bot.command(name="setmoderator")
 @commands.has_guild_permissions(administrator=True)
 async def set_moderator(ctx: disnake.AppCommandInteraction, member: disnake.Member):
     member = member or ctx.message.author
     guild = bot.get_guild(1060537877982887957)
     role = guild.get_role(1060541642450411560)
+
     await member.add_roles(role)
     await ctx.send(f"Пользователю {member.mention} была выдана роль {role.mention}")
 
 
-@bot.command()
+@bot.command(name="deletemoderator")
 @commands.has_guild_permissions(administrator=True)
-async def dellmoderator(ctx: disnake.AppCommandInteraction, member: disnake.Member):
+async def delete_moderator(ctx: disnake.AppCommandInteraction, member: disnake.Member):
     member = member or ctx.message.author
     guild = bot.get_guild(1060537877982887957)
     role = guild.get_role(1060541642450411560)
+
     await member.remove_roles(role)
     await ctx.send(f"Пользователю {member.mention} была снята роль {role.mention}")
 
 
-def save_data(user, data):
-    with open(f'./users/{user.id}.json', 'w') as file:
-        json.dump(data, file)
-
-
-# Функция загрузки данных пользователя из файла JSON
-def load_data(user):
-    try:
-        with open(f'./users/{user.id}.json', 'r') as file:
-            return json.load(file)
-    except FileNotFoundError:
-        return None
-
-
 # Создание команды регистрации
-@bot.command()
+@bot.command(name="register")
 async def register(ctx: disnake.AppCommandInteraction, name):
     # Проверка, был ли пользователь уже зарегистрирован
     data = load_data(ctx.author)
@@ -94,7 +97,7 @@ async def register(ctx: disnake.AppCommandInteraction, name):
 
 
 # Создание команды для просмотра баланса
-@bot.command()
+@bot.command(name="balance")
 async def balance(ctx):
     # Загрузка данных пользователя из файла JSON
     data = load_data(ctx.author)
@@ -107,7 +110,7 @@ async def balance(ctx):
     await ctx.send(f'{ctx.author.mention}, ваш текущий баланс: {data["coins"]}')
 
 
-@bot.command()
+@bot.command(name="pay")
 async def pay(ctx: disnake.AppCommandInteraction, recipient: disnake.User, amount: int):
     # Загрузка данных отправителя из файла JSON
     sender_data = load_data(ctx.author)
@@ -145,4 +148,4 @@ for filename in os.listdir("./cogs"):
     if filename.endswith(".py"):
         bot.load_extension(f"cogs.{filename[:-3]}")
 
-bot.run("MTA5ODk5MzExMjI5NjE5NDA3MA.GUj8WN.16iwjYtaouRXbsfJhCi1U7fa75ehLFb7YRbEnU")
+bot.run(settings.DISCORD_TOKEN)

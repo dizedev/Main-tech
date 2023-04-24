@@ -8,7 +8,7 @@ class CoinsCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command()
+    @commands.slash_command(name="coins")
     async def coins(self, ctx: disnake.AppCommandInteraction):
         coin = ["Орел", "Решка"]
         result = random.choice(coin)
