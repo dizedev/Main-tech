@@ -8,7 +8,7 @@ class MuteCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(name="mute", description="Заглушает по всему серверу на указанное время.")
+    @commands.slash_command(name="мут", description="Заглушает пользователя по всему серверу на указанное время.")
     @commands.has_permissions(manage_roles=True)
     async def mute(self, ctx: disnake.AppCommandInteraction, member: disnake.Member, time: int, *, reason=None):
         if disnake.utils.get(ctx.author.roles, id=1060541642450411560):
@@ -30,7 +30,7 @@ class MuteCommands(commands.Cog):
         else:
             await ctx.send(f'{ctx.author.mention}, у вас нет роли <@&1060541642450411560>.')
 
-    @commands.slash_command(name="unmute", description="Снимает мут с указанного пользователя.")
+    @commands.slash_command(name="унмут", description="Снимает мут с указанного пользователя.")
     @commands.has_permissions(manage_roles=True)
     async def unmute(self, ctx: disnake.AppCommandInteraction, member: disnake.Member):
         if disnake.utils.get(ctx.author.roles, id=1060541642450411560):

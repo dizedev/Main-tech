@@ -6,11 +6,11 @@ class MathCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(name="math")
+    @commands.slash_command(name="калькулятор", description="Помогает решить любой пример")
     async def math(self, ctx: disnake.AppCommandInteraction, *, equation):
         try:
             result = eval(equation)
-            await ctx.send(f'Задача: {equation} =  {result}')
+            await ctx.send(f'Задача: {equation} = {result}')
         except:
             await ctx.send('Ошибка при выполнении вычислений.')
 

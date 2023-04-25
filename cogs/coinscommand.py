@@ -8,8 +8,11 @@ class CoinsCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(name="coins")
+    @commands.slash_command(name="coins", description="Игра в Орел и Решку")
     async def coins(self, ctx: disnake.AppCommandInteraction):
+        if ctx.guild.id != 1099696069257990214:
+            await ctx.send('Эта команда доступна только на определенном сервере')
+            return
         coin = ["Орел", "Решка"]
         result = random.choice(coin)
         await ctx.send("Орел или решка? Угадайте! Результат будет через 3 секунды...")

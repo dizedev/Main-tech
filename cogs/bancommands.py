@@ -6,7 +6,7 @@ class BanCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(name="ban", description="Изгоняет указанного участника с сервера навсегда.")
+    @commands.slash_command(name="бан", description="Изгоняет указанного участника с сервера навсегда.")
     async def ban(self, ctx: disnake.AppCommandInteraction, member: disnake.Member, *, reason=None):
         if disnake.utils.get(ctx.author.roles, id=1060542125621649458):
             await member.ban(reason=reason)
@@ -15,7 +15,7 @@ class BanCommands(commands.Cog):
             await ctx.send(f'{ctx.author.mention}, у вас нет роли <@&1060542125621649458>.')
 
     @commands.has_any_role(1060542125621649458)
-    @commands.slash_command(name="unban")
+    @commands.slash_command(name="унбан", description="Снимает блокировку")
     async def unban(self, ctx: disnake.AppCommandInteraction, *, user: disnake.User):
         if disnake.utils.get(ctx.author.roles, id=1060542125621649458):
             await ctx.guild.unban(user)

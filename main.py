@@ -1,6 +1,6 @@
 import json
 import os
-
+import settings
 import disnake
 from disnake.ext import commands
 
@@ -28,13 +28,13 @@ async def on_ready():
     print("Bot is ready")
 
 
-@bot.command(name="super_secret_command")
+@bot.command(name="секрет")
 async def secret(ctx):
     await ctx.message.delete()
     await ctx.send(f'Привет, {ctx.author.mention}. Это тайное сообщение!')
 
 
-@bot.command(name="news")
+@bot.slash_command(name="news", description="Показывает последние новости (но это не точно...)")
 async def news(ctx):
     # Ваш код для получения новостей
     page_news = [
@@ -58,7 +58,7 @@ async def news(ctx):
     await ctx.send(embed=embed)
 
 
-@bot.command(name="setmoderator")
+@bot.slash_command(name="setmoderator", description="Выдает роль модератора")
 @commands.has_guild_permissions(administrator=True)
 async def set_moderator(ctx: disnake.AppCommandInteraction, member: disnake.Member):
     member = member or ctx.message.author
@@ -69,7 +69,7 @@ async def set_moderator(ctx: disnake.AppCommandInteraction, member: disnake.Memb
     await ctx.send(f"Пользователю {member.mention} была выдана роль {role.mention}")
 
 
-@bot.command(name="deletemoderator")
+@bot.command(name="deletemoderator", description="Снимает роль модератора")
 @commands.has_guild_permissions(administrator=True)
 async def delete_moderator(ctx: disnake.AppCommandInteraction, member: disnake.Member):
     member = member or ctx.message.author

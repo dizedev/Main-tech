@@ -8,7 +8,7 @@ class TicketsCommand(commands.Cog):
 
     ticket_channel = None
 
-    @commands.slash_command(name="ticket")
+    @commands.slash_command(name="ticket", description="Создает тикет")
     @commands.has_permissions(manage_channels=True)
     async def ticket(self, ctx: disnake.AppCommandInteraction):
         global ticket_channel
@@ -24,7 +24,7 @@ class TicketsCommand(commands.Cog):
         except:
             await ctx.send('Ошибка при создании канала. Пожалуйста, попробуйте позже.')
 
-    @commands.slash_command(name="close_ticket")
+    @commands.slash_command(name="close_ticket", description="Закрывает тикет")
     @commands.has_permissions(manage_channels=True)
     async def close_ticket(self, ctx: disnake.AppCommandInteraction):
         global ticket_channel

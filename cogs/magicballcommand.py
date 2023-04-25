@@ -7,14 +7,15 @@ class MagicBallCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(name="ball", description="Даёт верные ответы на все ваши вопросы.")
+    @commands.slash_command(name="шар", description="Даёт верные ответы на все ваши вопросы.")
     async def ball(self, ctx: disnake.AppCommandInteraction, *, question):
         answers = [
             "Я не знаю.",
             "Да.",
             "Нет.",
             "Возможно.",
-            "Спроси позже."
+            "Спроси позже.",
+            "Иди нахуй."
         ]
         await ctx.send(f"Ваш вопрос: {question}\nМой ответ: {random.choice(answers)}")
 
