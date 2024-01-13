@@ -11,7 +11,7 @@ class MuteCommands(commands.Cog):
     @commands.slash_command(name="мут", description="Заглушает пользователя по всему серверу на указанное время.")
     @commands.has_permissions(manage_roles=True)
     async def mute(self, ctx: disnake.AppCommandInteraction, member: disnake.Member, time: int, *, reason=None):
-        if disnake.utils.get(ctx.author.roles, id=1060541642450411560):
+        if disnake.utils.get(ctx.author.roles, id=):
             guild = ctx.guild
             muted_role = disnake.utils.get(guild.roles, name="Muted")
 
@@ -28,12 +28,12 @@ class MuteCommands(commands.Cog):
             await member.remove_roles(muted_role)
             await ctx.send(f"{member.mention} больше не замучен.")
         else:
-            await ctx.send(f'{ctx.author.mention}, у вас нет роли <@&1060541642450411560>.')
+            await ctx.send(f'{ctx.author.mention}, у вас нет роли <>.')
 
     @commands.slash_command(name="унмут", description="Снимает мут с указанного пользователя.")
     @commands.has_permissions(manage_roles=True)
     async def unmute(self, ctx: disnake.AppCommandInteraction, member: disnake.Member):
-        if disnake.utils.get(ctx.author.roles, id=1060541642450411560):
+        if disnake.utils.get(ctx.author.roles, id=):
             muted_role = disnake.utils.get(ctx.guild.roles, name="Muted")
 
             if muted_role not in member.roles:
@@ -43,7 +43,7 @@ class MuteCommands(commands.Cog):
             await member.remove_roles(muted_role)
             await ctx.send(f"{member.mention} больше не замучен.")
         else:
-            await ctx.send(f'{ctx.author.mention}, у вас нет роли <@&1060541642450411560>.')
+            await ctx.send(f'{ctx.author.mention}, у вас нет роли <@>.')
 
 
 def setup(bot):
