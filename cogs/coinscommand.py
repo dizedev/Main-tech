@@ -10,7 +10,7 @@ class CoinsCommand(commands.Cog):
 
     @commands.slash_command(name="coins", description="Игра в Орел и Решку")
     async def coins(self, ctx: disnake.AppCommandInteraction):
-        if ctx.guild.id != 1099696069257990214:
+        if ctx.guild.id != :
             await ctx.send('Эта команда доступна только на определенном сервере')
             return
         coin = ["Орел", "Решка"]
